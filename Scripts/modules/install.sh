@@ -52,3 +52,18 @@ function install_winehq() {
     sudo apt update
     sudo apt install --install-recommends winehq-stable -y
 }
+
+function install_macOS_theme() {
+    git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git --depth=1
+    chmod -R +x WhiteSur-gtk-theme
+    WhiteSur-gtk-theme/install.sh -l -N mojave
+    sudo WhiteSur-gtk-theme/tweaks.sh -g
+
+    git clone https://github.com/vinceliuice/WhiteSur-icon-theme.git --depth=1
+    chmod +x WhiteSur-icon-theme/install.sh
+    WhiteSur-icon-theme/install.sh
+
+    git clone https://github.com/vinceliuice/WhiteSur-wallpapers.git --depth=1
+    chmod +x WhiteSur-wallpapers/install-wallpapers.sh
+    WhiteSur-wallpapers/install-wallpapers.sh -t whitesur -c light
+}

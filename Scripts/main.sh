@@ -38,6 +38,12 @@ if [ $choice == "y" ]; then
     install_winehq
 fi
 
+read -p "If you want to install macOS theme right now? (N/y): " choice
+choice="${choice:-N}"
+if [ $choice == "y" ]; then
+    install_macOS_theme
+fi
+
 read -p "If you want to reboot right now? (N/y): " choice
 choice="${choice:-N}"
 if [ $choice == "y" ]; then
