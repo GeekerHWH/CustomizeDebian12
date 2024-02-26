@@ -1,9 +1,9 @@
 #!/bin/bash
 
-function tailor() {
+function tailor_desktop() {
     sudo apt update && sudo apt upgrade -y
     # install essential tools
-    sudo apt install net-tools vim curl -y
+    sudo apt install net-tools vim curl wget -y
     # install xorg and gnome-core
     sudo apt install xorg gnome-core -y
 
@@ -20,6 +20,12 @@ function tailor() {
 
     # install fonts
     # sudo apt install ttf-mscorefonts-installer -y
+}
+
+function tailor_server() {
+    sudo apt update && sudo apt upgrade -y
+    # install essential tools
+    sudo apt install net-tools curl wget openssh-server vim -y
 }
 
 function install_docker() {
@@ -47,8 +53,6 @@ function install_docker() {
     sudo groupadd docker
     sudo usermod -aG docker $SUDO_USER
     newgrp docker
-    sudo systemctl enable docker.service
-    sudo systemctl enable containerd.service
 }
 
 function install_winehq() {
@@ -73,4 +77,8 @@ function install_macOS_theme() {
     git clone https://github.com/vinceliuice/WhiteSur-wallpapers.git --depth=1
     chmod +x WhiteSur-wallpapers/install-wallpapers.sh
     WhiteSur-wallpapers/install-wallpapers.sh -t whitesur -c light
+}
+
+function install_nvidia_driver() {
+    sudo apt install nvidia-driver -y
 }
