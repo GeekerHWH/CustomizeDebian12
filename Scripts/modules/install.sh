@@ -42,6 +42,13 @@ function install_docker() {
 
     # Install Docker latest version:
     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+    # 
+    sudo groupadd docker
+    sudo usermod -aG docker $SUDO_USER
+    newgrp docker
+    sudo systemctl enable docker.service
+    sudo systemctl enable containerd.service
 }
 
 function install_winehq() {

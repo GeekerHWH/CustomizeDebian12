@@ -48,14 +48,20 @@ function set_dir_structure() {
         "$ORIGINAL_HOME/Downloads/Documents"
         "$ORIGINAL_HOME/Downloads/Repos"
         "$ORIGINAL_HOME/Downloads/Key-Pairs"
-        )
+    )
 
     for directory in "${directories[@]}"
     do
-        if [ ! -d $directory ]
+        if [ ! -d "$directory" ]
         then
-            echo $directory
-            mkdir -vp $directory
+            echo "$directory"
+            mkdir -vp "$directory"
+
+            # 修改文件夹所有者为原用户
+            sudo chown -R $SUDO_USER:$SUDO_USER "$directory"
+
+            # 设置文件夹权限为 rwxr-xr-x
+            sudo chmod -R 755 "$directory"
         fi
     done
 

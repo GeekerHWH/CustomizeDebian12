@@ -7,10 +7,12 @@ source ./modules/install.sh
 Tsinghua="https://mirrors.tuna.tsinghua.edu.cn/debian"
 Aliyun="https://mirrors.aliyun.com/debian"
 USTC="https://mirrors.ustc.edu.cn/debian"
+CQU="https://mirrors.cqu.edu.cn/debian"
 
 # main
 set_bashrc
 set_dir_structure
+changeMirror $CQU "Debian12"
 
 read -p "If you want to set GRUB timeout to 0s right now? (N/y): " choice
 choice="${choice:-N}"
