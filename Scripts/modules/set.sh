@@ -11,7 +11,6 @@ function set_bashrc() {
     original_user_home=$(eval echo ~$SUDO_USER)
 
     cat << 'EOF' >> $original_user_home/.bashrc
-export PATH=$PATH:/usr/local/go/bin
 
 function git_branch {
    branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"

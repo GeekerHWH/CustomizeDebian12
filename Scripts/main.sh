@@ -37,6 +37,12 @@ if [ $choice == "1" ]; then
         install_docker
     fi
 
+    read -p "If you want to install Go right now? (N/y): " choice
+    choice="${choice:-N}"
+    if [ $choice == "y" ]; then
+        install_go
+    fi
+
     read -p "If you want to install wineHQ right now? (N/y): " choice
     choice="${choice:-N}"
     if [ $choice == "y" ]; then

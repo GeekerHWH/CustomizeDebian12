@@ -3,7 +3,7 @@
 function tailor_desktop() {
     sudo apt update && sudo apt upgrade -y
     # install essential tools
-    sudo apt install net-tools vim curl wget -y
+    sudo apt install net-tools vim curl wget ftp -y
     # install xorg and gnome-core
     sudo apt install xorg gnome-core -y
 
@@ -81,4 +81,13 @@ function install_macOS_theme() {
 
 function install_nvidia_driver() {
     sudo apt install nvidia-driver -y
+}
+
+function install_go() {
+    curl -sSLO https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
+
+    # add local environment variable
+    original_user_home=$(eval echo ~$SUDO_USER)
+    echo "export PATH=$PATH:/usr/local/go/bin" >> $original_user_home/.bashrc
 }
