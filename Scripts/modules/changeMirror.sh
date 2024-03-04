@@ -23,6 +23,8 @@ deb $url/ bookworm-backports main contrib non-free non-free-firmware
 
 deb $url-security bookworm-security main contrib non-free non-free-firmware
 # deb-src $url bookworm-security main contrib non-free non-free-firmware" > "$sources_list"
+        sudo apt update -y
+
     else
         echo "This changeMirror script is only for Debian12"
         exit 1
