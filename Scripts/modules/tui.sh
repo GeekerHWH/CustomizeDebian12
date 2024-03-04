@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function tui_desktop() {
-    cmd=(dialog --separate-output --checklist "What's the purpose of this machine? Use space to choose" 0 0 0)
+    cmd=(dialog --separate-output --checklist "Choose the utilities that you want to install" 0 0 0)
     options=(1 "Daily Gnome Desktop" on    # any option can be set to default to "on"
             2 "MacOS theme" off
             3 "Golang" off
