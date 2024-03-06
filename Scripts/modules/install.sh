@@ -12,11 +12,12 @@ function tailor_desktop() {
 
     # install gnome-extensions
     sudo apt install gnome-tweaks gnome-shell-extension-manager -y
+
     # install FOSS
-    sudo apt install vlc qbittorrent telegram-desktop -y
+    # sudo apt install vlc qbittorrent telegram-desktop -y
 
     # install my favorite apps
-    install_nekoray
+    # install_nekoray
     # sudo apt install code google-chrome-stable balena-etcher linuxqq -y
 
     # install fonts
@@ -93,9 +94,24 @@ function install_go() {
     echo "export PATH=$PATH:/usr/local/go/bin" >> $original_user_home/.bashrc
 }
 
+
+# need to keep pace with official updates
 function install_nekoray() {
     nekoray_version=3.26-2023-12-09
     curl -sSLO https://github.com/MatsuriDayo/nekoray/releases/latest/download/nekoray-$nekoray_version-debian-x64.deb
     sudo apt install ./nekoray-$nekoray_version-debian-x64.deb -y
     rm nekoray-$nekoray_version-debian-x64.deb
+}
+
+# need to keep pace with official updates
+function install_protobuf() {
+    sudo apt install -y protobuf-compiler
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+    go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+
+    # add local environment variable
+    original_user_home=$(eval echo ~$SUDO_USER)
+    echo "export PATH="$PATH:$(go env GOPATH)/bin"" >> $original_user_home/.bashrc
+
+EOF
 }
