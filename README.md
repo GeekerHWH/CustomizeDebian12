@@ -29,13 +29,22 @@ sudo ./main.sh
 ![2](Notes/2.png)
 
 ## features
-- [x] install basic Gnome Desktop Environment
-- [x] install softwares like (MacOS theme / Golang / Docker / WineHQ)
-- [ ] tweaks (experimental)
-  - [x] display git branch in terminal
-  - [x] set GRUB timeout to 0 sec
-  - [x] set tab in bash like zsh
-- [ ] install Protobuf and gRPC (Developing)
+- [x] Quick install basic Gnome Desktop Environment
+- [x] Install softwares like (MacOS theme / Docker / WineHQ)
+- [x] Tweaks (experimental)
+- [ ] Customize Server Lab (experimental)
+
+### supported softwares (Group if nums surpass 15)
+- [x] VSCode
+- [x] Docker
+- [x] WineHQ
+- [ ] Nvidia-driver
+- [x] MacOS Theme
+- [x] Golang
+- [ ] Protobuf
+- [ ] gRPC
+- [ ] Nekoray
+- [x] Chrome
 
 ### ChangeMirror module is developing
 https://github.com/GeekerHWH/CustomizeDebian12

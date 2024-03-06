@@ -30,6 +30,17 @@ function tailor_server() {
     sudo apt install net-tools curl wget openssh-server vim -y
 }
 
+function install_vscode() {
+    sudo apt-get install wget gpg -y
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+    rm -f packages.microsoft.gpg
+
+    sudo apt update -y
+    sudo apt install code -y
+}
+
 function install_docker() {
     # Remove old versions:
     for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
@@ -85,6 +96,12 @@ function install_nvidia_driver() {
     sudo apt install nvidia-driver -y
 }
 
+function install_chrome() {
+    curl -sSLO https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    sudo apt install ./google-chrome-stable_current_amd64.deb -y
+    rm google-chrome-stable_current_amd64.deb
+}
+
 function install_go() {
     curl -sSLO https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
     sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
@@ -92,15 +109,6 @@ function install_go() {
     # add local environment variable
     original_user_home=$(eval echo ~$SUDO_USER)
     echo "export PATH=$PATH:/usr/local/go/bin" >> $original_user_home/.bashrc
-}
-
-
-# need to keep pace with official updates
-function install_nekoray() {
-    nekoray_version=3.26-2023-12-09
-    curl -sSLO https://github.com/MatsuriDayo/nekoray/releases/latest/download/nekoray-$nekoray_version-debian-x64.deb
-    sudo apt install ./nekoray-$nekoray_version-debian-x64.deb -y
-    rm nekoray-$nekoray_version-debian-x64.deb
 }
 
 # need to keep pace with official updates
@@ -114,4 +122,12 @@ function install_protobuf() {
     echo "export PATH="$PATH:$(go env GOPATH)/bin"" >> $original_user_home/.bashrc
 
 EOF
+}
+
+# need to keep pace with official updates
+function install_nekoray() {
+    nekoray_version=3.26-2023-12-09
+    curl -sSLO https://github.com/MatsuriDayo/nekoray/releases/latest/download/nekoray-$nekoray_version-debian-x64.deb
+    sudo apt install ./nekoray-$nekoray_version-debian-x64.deb -y
+    rm nekoray-$nekoray_version-debian-x64.deb
 }

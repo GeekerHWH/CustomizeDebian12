@@ -5,9 +5,11 @@ function tui_desktop() {
     cmd=(dialog --separate-output --checklist "Choose the utilities that you want to install" 0 0 0)
     options=(1 "Daily Gnome Desktop" on    # any option can be set to default to "on"
             2 "MacOS theme" off
-            3 "Golang" off
-            4 "Docker" off
-            5 "WineHQ" off)
+            3 "Chrome" off
+            4 "VSCode" off
+            5 "Golang" off
+            6 "Docker" off
+            7 "WineHQ" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices
@@ -22,14 +24,22 @@ function tui_desktop() {
                 install_macOS_theme
                 ;;
             3)
+                echo "Start installing Chrome"
+                install_chrome
+                ;;
+            4)
+                echo "Start installing VSCode"
+                install_vscode
+                ;;
+            5)
                 echo "Start installing Golang"
                 install_go
                 ;;
-            4)
+            6)
                 echo "Start installing Docker"
                 install_docker
                 ;;
-            5)
+            7)
                 echo "Start installing WineHQ"
                 install_winehq
                 ;;
