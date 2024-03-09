@@ -17,7 +17,6 @@ function tailor_desktop() {
     # sudo apt install vlc qbittorrent telegram-desktop -y
 
     # install my favorite apps
-    # install_nekoray
     # sudo apt install code google-chrome-stable balena-etcher linuxqq -y
 
     # install fonts
@@ -65,7 +64,6 @@ function install_docker() {
     # 
     sudo groupadd docker
     sudo usermod -aG docker $SUDO_USER
-    newgrp docker
 }
 
 function install_winehq() {
@@ -120,8 +118,6 @@ function install_protobuf() {
     # add local environment variable
     original_user_home=$(eval echo ~$SUDO_USER)
     echo "export PATH="$PATH:$(go env GOPATH)/bin"" >> $original_user_home/.bashrc
-
-EOF
 }
 
 # need to keep pace with official updates

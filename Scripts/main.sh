@@ -11,7 +11,7 @@ USTC="https://mirrors.ustc.edu.cn/debian"
 CQU="https://mirrors.cqu.edu.cn/debian"
 
 # main
-changeMirror $CQU "Debian12"
+# changeMirror $CQU "Debian12"
 
 sudo apt install dialog -y
 

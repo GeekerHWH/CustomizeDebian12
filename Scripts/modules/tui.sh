@@ -6,10 +6,14 @@ function tui_desktop() {
     options=(1 "Daily Gnome Desktop" on    # any option can be set to default to "on"
             2 "MacOS theme" off
             3 "Chrome" off
-            4 "VSCode" off
-            5 "Golang" off
-            6 "Docker" off
-            7 "WineHQ" off)
+            4 “qBittorrent” off
+            5 "VSCode" off
+            6 "Golang" off
+            7 "Docker" off
+            8 "WineHQ" off
+            9 "GIMP" off
+            10 "VLC" off
+            11 "AppImageLauncher" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices
@@ -28,20 +32,32 @@ function tui_desktop() {
                 install_chrome
                 ;;
             4)
+                sudo apt install qbittorrent
+                ;;
+            5)
                 echo "Start installing VSCode"
                 install_vscode
                 ;;
-            5)
+            6)
                 echo "Start installing Golang"
                 install_go
                 ;;
-            6)
+            7)
                 echo "Start installing Docker"
                 install_docker
                 ;;
-            7)
+            8)
                 echo "Start installing WineHQ"
                 install_winehq
+                ;;
+            9)
+                sudo apt install gimp
+                ;;
+            10)
+                sudo apt install vlc
+                ;;
+            11)
+                sudo apt install appimagelauncher
                 ;;
         esac
     done

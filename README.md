@@ -34,7 +34,7 @@ sudo ./main.sh
 - [x] Tweaks (experimental)
 - [ ] Customize Server Lab (experimental)
 
-### supported softwares (Group if nums surpass 15)
+### Supported Desktop Softwares (Group if nums surpass 15)
 - [x] VSCode
 - [x] Docker
 - [x] WineHQ
@@ -45,6 +45,10 @@ sudo ./main.sh
 - [ ] gRPC
 - [ ] Nekoray
 - [x] Chrome
+- [x] qBittorrent
+- [x] GIMP
+- [x] VLC
+- [x] AppImageLauncher
 
 ### ChangeMirror module is developing
 https://github.com/GeekerHWH/CustomizeDebian12
