@@ -15,7 +15,7 @@ sudo apt install dialog -y
 
 choice=$(dialog --title "Customize Debian 12" --menu "What's the purpose of this machine? press Enter to confirm" 0 0 0 1 "Desktop" 2 "Server Lab for VMs" 3>&1 1>&2 2>&3 3>&-); clear
 if [ $choice == "1" ];then
-    tui_desktop
+    tui_desktop2
 else # for server
     read -p "If you want to set GRUB timeout to 0s right now? (N/y): " choice
     choice="${choice:-N}"

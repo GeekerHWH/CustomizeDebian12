@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function tailor_desktop() {
+function tailor_gnome() {
     sudo apt update && sudo apt upgrade -y
     # install essential tools
     sudo apt install net-tools vim curl wget ftp -y
