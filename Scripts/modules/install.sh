@@ -61,7 +61,6 @@ function install_docker() {
     # Install Docker latest version:
     sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-    # 
     sudo groupadd docker
     sudo usermod -aG docker $SUDO_USER
 }
@@ -127,3 +126,4 @@ function install_nekoray() {
     sudo apt install ./nekoray-$nekoray_version-debian-x64.deb -y
     rm nekoray-$nekoray_version-debian-x64.deb
 }
+

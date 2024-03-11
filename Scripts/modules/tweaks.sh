@@ -78,3 +78,4 @@ function set_dir_structure() {
         fi
     done
 }
+

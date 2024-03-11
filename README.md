@@ -14,10 +14,7 @@ please let me know to create an issue! :)
 
 ## How to use
 ```bash
-git clone https://github.com/GeekerHWH/CustomizeDebian12.git
-cd CustomizeDebian12/Scripts
-chmod u+x -R main.sh modules/
-sudo ./main.sh
+sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeekerHWH/CustomizeDebian12/main/CustomizeDebian12.sh)"
 # follow the TUI to finish installing your Debian, and you are done!
 ```
 

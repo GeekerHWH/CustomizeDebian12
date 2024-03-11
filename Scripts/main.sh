@@ -1,5 +1,3 @@
-#!/bin/bash
-
 source ./modules/tweaks.sh
 source ./modules/changeMirror.sh
 source ./modules/install.sh
