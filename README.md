@@ -47,6 +47,7 @@ sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeekerHWH/Customize
   - [x] qBittorrent
   - [x] WineHQ
   - [x] GIMP
+  - [x] DarkTable
   - [x] VLC
   - [x] AppImageLauncher
 - Development Tools

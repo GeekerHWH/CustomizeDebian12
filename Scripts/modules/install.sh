@@ -127,3 +127,9 @@ function install_nekoray() {
     rm nekoray-$nekoray_version-debian-x64.deb
 }
 
+function install_darktable() {
+    echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/graphics:darktable.list
+    curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg > /dev/null
+    sudo apt update -y
+    sudo apt install darktable -y
+}

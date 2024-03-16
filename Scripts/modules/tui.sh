@@ -212,8 +212,9 @@ function tui_desktop_dailysoftware() {
             2 "qBittorrent" off
             3 "WineHQ" off
             4 "GIMP" off
-            5 "VLC" off
-            6 "AppImageLauncher" off)
+            5 "DarkTable" off
+            6 "VLC" off
+            7 "AppImageLauncher" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
     for choice in $choices
@@ -224,20 +225,23 @@ function tui_desktop_dailysoftware() {
                 install_chrome
                 ;;
             2)
-                sudo apt install qbittorrent
+                sudo apt install qbittorrent -y
                 ;;
             3)
                 echo "Start installing WineHQ"
                 install_winehq
                 ;;
             4)
-                sudo apt install gimp
+                sudo apt install gimp -y
                 ;;
             5)
-                sudo apt install vlc
+                install_darktable
                 ;;
             6)
-                sudo apt install appimagelauncher
+                sudo apt install vlc -y
+                ;;
+            7)
+                sudo apt install appimagelauncher -y
                 ;;
         esac
     done
