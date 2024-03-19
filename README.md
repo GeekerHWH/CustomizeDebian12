@@ -7,10 +7,10 @@ This is his repository: https://github.com/ChrisTitusTech/winutil
 Some of you might want to ask "hey, we've got apt instead, why to use your work?"
 Well, some softwares do need gpg key and some stuffs, or some guys really hope to get a clean Debian system like me, or someone who need to set up his Desktop automatically and to drink a cup of coffee :P
 
-All in all, hope you enjoy, staring this repo is the best support
-
 if you have any question about scripts, 
 please let me know to create an issue! :)
+
+This project is highly experimental, DO NOT use it in development environment!
 
 OP is just an undergraduate student now, may have no time to reply very often. TwT
 
@@ -64,5 +64,3 @@ sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeekerHWH/Customize
 - [ ] I'm considering how many country really need to change the mirror...
 - [ ] group softwares into different categories
 
-https://github.com/GeekerHWH/CustomizeDebian12
-![Procedure](Notes/CustomizeDebian12.drawio.png)

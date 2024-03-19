@@ -199,8 +199,9 @@ function tui_desktop_theme() {
     --menu "Which theme do you prefer? press Enter to confirm" 0 0 0 \
     1 "Original Gnome" 2 "MacOS Theme" 3>&1 1>&2 2>&3 3>&-); clear
     if [ $choice == "1" ];then
-        echo "Original theme, installing nothing"
+        tailor_gnome
     else # MacOS theme
+        tailor_gnome
         install_macOS_theme
     fi
 }
@@ -282,8 +283,6 @@ function tui_desktop_development() {
         esac
     done
 }
-
-
 
 function tui_server_lab() {
     cmd=(dialog --separate-output --checklist "What's the purpose of this machine? Use space to choose" 0 0 0)
