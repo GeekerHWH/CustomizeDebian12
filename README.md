@@ -44,7 +44,7 @@ sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeekerHWH/Customize
 - [x] Quick install basic Gnome Desktop Environment
 - [x] Install softwares like (MacOS theme / Docker / WineHQ)
 - [x] Tweaks (experimental)
-- [ ] Customize Server Lab (experimental)
+- [ ] Customize Server Lab (highly experimental)
 
 ### tweaks
 set colorful grep

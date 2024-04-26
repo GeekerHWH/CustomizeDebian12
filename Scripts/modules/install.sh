@@ -23,6 +23,7 @@ function tailor_gnome() {
     # sudo apt install ttf-mscorefonts-installer -y
 }
 
+# To Do: not used
 function tailor_server() {
     sudo apt update && sudo apt upgrade -y
     # install essential tools
@@ -89,6 +90,7 @@ function install_macOS_theme() {
     WhiteSur-wallpapers/install-wallpapers.sh -t whitesur -c light
 }
 
+# To Do: not used
 function install_nvidia_driver() {
     sudo apt install nvidia-driver -y
 }
@@ -99,6 +101,7 @@ function install_chrome() {
     rm google-chrome-stable_current_amd64.deb
 }
 
+# need to keep pace with official updates
 function install_go() {
     curl -sSLO https://go.dev/dl/go1.22.0.linux-amd64.tar.gz
     sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.0.linux-amd64.tar.gz
