@@ -4,16 +4,10 @@ This is a repository for my own scripts mainly for debloat debian 12
 I'm inspired by ChrisTitus' WinUtilities, which is great for desktop user to set up their workspace efficiently and elegently
 This is his repository: https://github.com/ChrisTitusTech/winutil
 
-Some of you might want to ask "hey, we've got apt instead, why to use your work?"
-Well, some softwares do need gpg key and some stuffs, or some guys really hope to get a clean Debian system like me, or someone who need to set up his Desktop automatically and to drink a cup of coffee :P
-
 if you have any question about scripts, 
 please let me know to create an issue! :)
 
 This project is highly experimental, DO NOT use it in development environment!
-
-OP is just an undergraduate student now, may have no time to reply very often. TwT
-
 ## How to use
 Prerequisite: make sure you have `curl` installed
 ```bash
@@ -45,12 +39,3 @@ sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/GeekerHWH/Customize
 - [x] Install softwares like (MacOS theme / Docker / WineHQ)
 - [x] Tweaks (experimental)
 - [ ] Customize Server Lab (highly experimental)
-
-### tweaks
-set colorful grep
-
-### What are in developing
-- [ ] fonts support fixed
-- [ ] I'm considering how many country really need to change the mirror...
-- [ ] group softwares into different categories
-

@@ -10,8 +10,12 @@ source ./tui/tui_server.sh
 echo "Script must be run as root user."
 sudo apt install dialog -y
 
-choice=$(dialog --title "Customize Debian 12" --menu "What's the purpose of this machine? press Enter to confirm" 0 0 0 1 "Desktop" 2 "Server Lab for VMs" 3>&1 1>&2 2>&3 3>&-); clear
-if [ $choice == "1" ];then
+choice=$(dialog --title "Customize Debian 12" \
+    --menu "What's the purpose of this machine? press Enter to confirm" 0 0 0 \
+    1 "Desktop" 2 "Server Lab for VMs" 3>&1 1>&2 2>&3 3>&-)
+clear
+
+if [ $choice == "1" ]; then
     tui_desktop
 else # for server
     echo "customize server is in developing, Please exit by CTRL+C!!!"

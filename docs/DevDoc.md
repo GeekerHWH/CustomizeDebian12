@@ -6,8 +6,9 @@
 # need to be tested functions
 
 ### install
-- [ ] install_chrome
+- [x] install_chrome
 - [ ] install_winehq
+- [ ] install_docker
 - [x] install_darktable
 
 

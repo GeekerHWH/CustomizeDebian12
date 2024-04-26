@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function tailor_gnome() {
+function install_gnome_core() {
     sudo apt update && sudo apt upgrade -y
     # install essential tools
     sudo apt install net-tools vim curl wget ftp -y
@@ -12,9 +12,6 @@ function tailor_gnome() {
 
     # install gnome-extensions
     sudo apt install font-manager gnome-tweaks gnome-shell-extension-manager -y
-
-    # install FOSS
-    # sudo apt install vlc qbittorrent telegram-desktop -y
 
     # install my favorite apps
     # sudo apt install code google-chrome-stable balena-etcher linuxqq -y
@@ -32,7 +29,7 @@ function tailor_server() {
 
 function install_vscode() {
     sudo apt-get install wget gpg -y
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
     sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
     sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
     rm -f packages.microsoft.gpg
@@ -54,9 +51,9 @@ function install_docker() {
 
     # Add the repository to Apt sources:
     echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+        sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
     sudo apt-get update
 
     # Install Docker latest version:
@@ -67,7 +64,7 @@ function install_docker() {
 }
 
 function install_winehq() {
-    sudo dpkg --add-architecture i386 
+    sudo dpkg --add-architecture i386
     sudo mkdir -pm755 /etc/apt/keyrings
     sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
     sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
@@ -108,7 +105,7 @@ function install_go() {
 
     # add local environment variable
     original_user_home=$(eval echo ~$SUDO_USER)
-    echo "export PATH=$PATH:/usr/local/go/bin" >> $original_user_home/.bashrc
+    echo "export PATH=$PATH:/usr/local/go/bin" >>$original_user_home/.bashrc
 }
 
 # need to keep pace with official updates
@@ -119,7 +116,7 @@ function install_protobuf() {
 
     # add local environment variable
     original_user_home=$(eval echo ~$SUDO_USER)
-    echo "export PATH="$PATH:$(go env GOPATH)/bin"" >> $original_user_home/.bashrc
+    echo "export PATH="$PATH:$(go env GOPATH)/bin"" >>$original_user_home/.bashrc
 }
 
 # need to keep pace with official updates
@@ -132,7 +129,7 @@ function install_nekoray() {
 
 function install_darktable() {
     echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/graphics:darktable.list
-    curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg > /dev/null
+    curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg >/dev/null
     sudo apt update -y
     sudo apt install darktable -y
 }
