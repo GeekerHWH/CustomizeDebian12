@@ -1,12 +1,11 @@
 #!/bin/bash
 
 # only for debian12
-function changeMirror(){
+function changeMirror() {
     local url=$1
     local os=$2
 
-    if [ $os = "Debian12" ]
-    then
+    if [ $os = "Debian12" ]; then
         sources_list="/etc/apt/sources.list"
         backup_file="$sources_list.bak"
         sudo cp "$sources_list" "$backup_file"
@@ -22,7 +21,7 @@ deb $url/ bookworm-backports main contrib non-free non-free-firmware
 # deb-src $url/ bookworm-backports main contrib non-free non-free-firmware
 
 deb $url-security bookworm-security main contrib non-free non-free-firmware
-# deb-src $url bookworm-security main contrib non-free non-free-firmware" > "$sources_list"
+# deb-src $url bookworm-security main contrib non-free non-free-firmware" >"$sources_list"
         sudo apt update -y
 
     else
@@ -40,7 +39,7 @@ function tailor_gnome() {
     # install xorg and gnome-core
     sudo apt install xorg gnome-core -y
 
-    sudo apt purge firefox-esr gnome-logs gnome-characters gnome-contacts gnome-text-editor gnome-font-viewer gnome-accessibility-themes yelp totem eog evince -y
+    sudo apt purge firefox-esr gnome-logs gnome-characters gnome-contacts gnome-text-editor gnome-font-viewer gnome-accessibility-themes yelp totem evince -y
     sudo apt autoremove -y
 
     # install gnome-extensions
@@ -64,7 +63,7 @@ function tailor_server() {
 
 function install_vscode() {
     sudo apt-get install wget gpg -y
-    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
     sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
     sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
     rm -f packages.microsoft.gpg
@@ -86,9 +85,9 @@ function install_docker() {
 
     # Add the repository to Apt sources:
     echo \
-    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+        sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
     sudo apt-get update
 
     # Install Docker latest version:
@@ -99,7 +98,7 @@ function install_docker() {
 }
 
 function install_winehq() {
-    sudo dpkg --add-architecture i386 
+    sudo dpkg --add-architecture i386
     sudo mkdir -pm755 /etc/apt/keyrings
     sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
     sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/debian/dists/bookworm/winehq-bookworm.sources
@@ -138,7 +137,7 @@ function install_go() {
 
     # add local environment variable
     original_user_home=$(eval echo ~$SUDO_USER)
-    echo "export PATH=$PATH:/usr/local/go/bin" >> $original_user_home/.bashrc
+    echo "export PATH=$PATH:/usr/local/go/bin" >>$original_user_home/.bashrc
 }
 
 # need to keep pace with official updates
@@ -149,7 +148,7 @@ function install_protobuf() {
 
     # add local environment variable
     original_user_home=$(eval echo ~$SUDO_USER)
-    echo "export PATH="$PATH:$(go env GOPATH)/bin"" >> $original_user_home/.bashrc
+    echo "export PATH="$PATH:$(go env GOPATH)/bin"" >>$original_user_home/.bashrc
 }
 
 # need to keep pace with official updates
@@ -162,7 +161,7 @@ function install_nekoray() {
 
 function install_darktable() {
     echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/graphics:darktable.list
-    curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg > /dev/null
+    curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg >/dev/null
     sudo apt update -y
     sudo apt install darktable -y
 }
@@ -178,7 +177,7 @@ function display_git_branch() {
     # get the home path
     original_user_home=$(eval echo ~$SUDO_USER)
 
-    cat << 'EOF' >> $original_user_home/.bashrc
+    cat <<'EOF' >>$original_user_home/.bashrc
 
 function git_branch {
    branch="`git branch 2>/dev/null | grep "^\*" | sed -e "s/^\*\ //"`"
@@ -196,7 +195,7 @@ EOF
 
 function bind_tab_like_zsh() {
     original_user_home=$(eval echo ~$SUDO_USER)
-    cat << 'EOF' >> $original_user_home/.bashrc
+    cat <<'EOF' >>$original_user_home/.bashrc
 bind 'set show-all-if-ambiguous on'
 bind 'TAB:menu-complete'
 EOF
@@ -205,18 +204,18 @@ EOF
 # alias ll='ls -alh'
 function alias_ll() {
     original_user_home=$(eval echo ~$SUDO_USER)
-    echo "alias ll='ls -alh'" >> $original_user_home/.bashrc
+    echo "alias ll='ls -alh'" >>$original_user_home/.bashrc
 }
 
 # alias docker=podman
 function alias_docker_podman() {
     original_user_home=$(eval echo ~$SUDO_USER)
-    echo "docker=podman" >> $original_user_home/.bashrc
+    echo "docker=podman" >>$original_user_home/.bashrc
 }
 
 function alias_color_grep() {
     original_user_home=$(eval echo ~$SUDO_USER)
-    echo "alias grep='grep --color=auto'" >> $original_user_home/.bashrc
+    echo "alias grep='grep --color=auto'" >>$original_user_home/.bashrc
 }
 
 function set_dir_structure() {
@@ -236,10 +235,8 @@ function set_dir_structure() {
         "$ORIGINAL_HOME/Downloads/Key-Pairs"
     )
 
-    for directory in "${directories[@]}"
-    do
-        if [ ! -d "$directory" ]
-        then
+    for directory in "${directories[@]}"; do
+        if [ ! -d "$directory" ]; then
             echo "$directory"
             mkdir -vp "$directory"
 
@@ -254,117 +251,113 @@ function set_dir_structure() {
 
 #!/bin/bash
 
-
 # Deprecated
 function tui_desktop1() {
     cmd=(dialog --separate-output --checklist "Choose the utilities that you want to install" 0 0 0)
-    options=(1 "Daily Gnome Desktop" on    # any option can be set to default to "on"
-            2 "MacOS theme" off
-            3 "Chrome" off
-            4 “qBittorrent” off
-            5 "VSCode" off
-            6 "Golang" off
-            7 "Docker" off
-            8 "WineHQ" off
-            9 "GIMP" off
-            10 "VLC" off
-            11 "AppImageLauncher" off)
+    options=(1 "Daily Gnome Desktop" on # any option can be set to default to "on"
+        2 "MacOS theme" off
+        3 "Chrome" off
+        4 “qBittorrent” off
+        5 "VSCode" off
+        6 "Golang" off
+        7 "Docker" off
+        8 "WineHQ" off
+        9 "GIMP" off
+        10 "VLC" off
+        11 "AppImageLauncher" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Start installing Gnome Desktop Environment"
-                tailor_gnome
-                ;;
-            2)
-                echo "Start installing MacOS theme"
-                install_macOS_theme
-                ;;
-            3)
-                echo "Start installing Chrome"
-                install_chrome
-                ;;
-            4)
-                sudo apt install qbittorrent
-                ;;
-            5)
-                echo "Start installing VSCode"
-                install_vscode
-                ;;
-            6)
-                echo "Start installing Golang"
-                install_go
-                ;;
-            7)
-                echo "Start installing Docker"
-                install_docker
-                ;;
-            8)
-                echo "Start installing WineHQ"
-                install_winehq
-                ;;
-            9)
-                sudo apt install gimp
-                ;;
-            10)
-                sudo apt install vlc
-                ;;
-            11)
-                sudo apt install appimagelauncher
-                ;;
+        1)
+            echo "Start installing Gnome Desktop Environment"
+            tailor_gnome
+            ;;
+        2)
+            echo "Start installing MacOS theme"
+            install_macOS_theme
+            ;;
+        3)
+            echo "Start installing Chrome"
+            install_chrome
+            ;;
+        4)
+            sudo apt install qbittorrent
+            ;;
+        5)
+            echo "Start installing VSCode"
+            install_vscode
+            ;;
+        6)
+            echo "Start installing Golang"
+            install_go
+            ;;
+        7)
+            echo "Start installing Docker"
+            install_docker
+            ;;
+        8)
+            echo "Start installing WineHQ"
+            install_winehq
+            ;;
+        9)
+            sudo apt install gimp
+            ;;
+        10)
+            sudo apt install vlc
+            ;;
+        11)
+            sudo apt install appimagelauncher
+            ;;
         esac
     done
 
     # following section is for tweaks
     cmd=(dialog --separate-output --checklist "Feel free to choose tweaks that you like" 0 0 0)
-    options=(1 "display git branch in terminal" on    # any option can be set to default to "on"
-            2 "bind tab with auto-suggestion" on
-            3 "set GRUB timeout to 0 sec" on)
+    options=(1 "display git branch in terminal" on # any option can be set to default to "on"
+        2 "bind tab with auto-suggestion" on
+        3 "set GRUB timeout to 0 sec" on)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Now the git branch will be displayed in your terminal"
-                display_git_branch
-                ;;
-            2)
-                echo "Now you can use tab to auto-suggestion"
-                bind_tab_like_zsh
-                ;;
-            3)
-                echo "Now your GRUB timeout is set to 0 sec"
-                set_grub_time_0
-                ;;
+        1)
+            echo "Now the git branch will be displayed in your terminal"
+            display_git_branch
+            ;;
+        2)
+            echo "Now you can use tab to auto-suggestion"
+            bind_tab_like_zsh
+            ;;
+        3)
+            echo "Now your GRUB timeout is set to 0 sec"
+            set_grub_time_0
+            ;;
         esac
     done
 
     # set alias
     cmd=(dialog --separate-output --checklist "Choose the alias you want" 0 0 0)
-    options=(1 "ll='ls -alh'" on    # any option can be set to default to "on"
-            2 "docker='podman'" on)
+    options=(1 "ll='ls -alh'" on # any option can be set to default to "on"
+        2 "docker='podman'" on)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Now your 'll' is equivalent to 'ls -alh'"
-                alias_ll
-                ;;
-            2)
-                echo "Now your 'docker' is equivalent to 'podman'"
-                alias_docker_podman
-                ;;
+        1)
+            echo "Now your 'll' is equivalent to 'ls -alh'"
+            alias_ll
+            ;;
+        2)
+            echo "Now your 'docker' is equivalent to 'podman'"
+            alias_docker_podman
+            ;;
         esac
     done
 
-
     # reboot
-    choice=$(dialog --stdout --title "If you want to Reboot right now?" --yesno "Desktop Environment need reboot to setup" 0 0 && echo "1" || echo "2");clear
+    choice=$(dialog --stdout --title "If you want to Reboot right now?" --yesno "Desktop Environment need reboot to setup" 0 0 && echo "1" || echo "2")
+    clear
     choice="${choice:-2}"
     if [ $choice == "1" ]; then
         reboot
@@ -374,73 +367,72 @@ function tui_desktop1() {
 # Recommended
 function tui_desktop2() {
     while true; do
-        choice=$(dialog --menu "What kind of software you want" 0 0 0 1 "Desktop Environment" 2 "Daily Software" 3 "Development Tools" 3>&1 1>&2 2>&3); clear
+        choice=$(dialog --menu "What kind of software you want" 0 0 0 1 "Desktop Environment" 2 "Daily Software" 3 "Development Tools" 3>&1 1>&2 2>&3)
+        clear
 
         case $choice in
-            1)
-                tui_desktop_theme
-                ;;
-            2)
-                tui_desktop_dailysoftware
-                ;;
-            3)
-                tui_desktop_development
-                ;;
-            *)
-                clear
-                break
-                ;;
+        1)
+            tui_desktop_theme
+            ;;
+        2)
+            tui_desktop_dailysoftware
+            ;;
+        3)
+            tui_desktop_development
+            ;;
+        *)
+            clear
+            break
+            ;;
         esac
     done
 
     # following section is for tweaks
     cmd=(dialog --separate-output --checklist "Feel free to choose tweaks that you like" 0 0 0)
-    options=(1 "display git branch in terminal" on    # any option can be set to default to "on"
-            2 "bind tab with auto-suggestion" on
-            3 "set GRUB timeout to 0 sec" on)
+    options=(1 "display git branch in terminal" on # any option can be set to default to "on"
+        2 "bind tab with auto-suggestion" on
+        3 "set GRUB timeout to 0 sec" on)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Now the git branch will be displayed in your terminal"
-                display_git_branch
-                ;;
-            2)
-                echo "Now you can use tab to auto-suggestion"
-                bind_tab_like_zsh
-                ;;
-            3)
-                echo "Now your GRUB timeout is set to 0 sec"
-                set_grub_time_0
-                ;;
+        1)
+            echo "Now the git branch will be displayed in your terminal"
+            display_git_branch
+            ;;
+        2)
+            echo "Now you can use tab to auto-suggestion"
+            bind_tab_like_zsh
+            ;;
+        3)
+            echo "Now your GRUB timeout is set to 0 sec"
+            set_grub_time_0
+            ;;
         esac
     done
 
     # set alias
     cmd=(dialog --separate-output --checklist "Choose the alias you want" 0 0 0)
-    options=(1 "ll='ls -alh'" on    # any option can be set to default to "on"
-            2 "docker='podman'" on)
+    options=(1 "ll='ls -alh'" on # any option can be set to default to "on"
+        2 "docker='podman'" on)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Now your 'll' is equivalent to 'ls -alh'"
-                alias_ll
-                ;;
-            2)
-                echo "Now your 'docker' is equivalent to 'podman'"
-                alias_docker_podman
-                ;;
+        1)
+            echo "Now your 'll' is equivalent to 'ls -alh'"
+            alias_ll
+            ;;
+        2)
+            echo "Now your 'docker' is equivalent to 'podman'"
+            alias_docker_podman
+            ;;
         esac
     done
 
-
     # reboot
-    choice=$(dialog --stdout --title "If you want to Reboot right now?" --yesno "Desktop Environment need reboot to setup" 0 0 && echo "1" || echo "2");clear
+    choice=$(dialog --stdout --title "If you want to Reboot right now?" --yesno "Desktop Environment need reboot to setup" 0 0 && echo "1" || echo "2")
+    clear
     choice="${choice:-2}"
     if [ $choice == "1" ]; then
         reboot
@@ -450,9 +442,10 @@ function tui_desktop2() {
 # case 1
 function tui_desktop_theme() {
     choice=$(dialog --title "Customize Debian 12" \
-    --menu "Which theme do you prefer? press Enter to confirm" 0 0 0 \
-    1 "Original Gnome" 2 "MacOS Theme" 3>&1 1>&2 2>&3 3>&-); clear
-    if [ $choice == "1" ];then
+        --menu "Which theme do you prefer? press Enter to confirm" 0 0 0 \
+        1 "Original Gnome" 2 "MacOS Theme" 3>&1 1>&2 2>&3 3>&-)
+    clear
+    if [ $choice == "1" ]; then
         tailor_gnome
     else # MacOS theme
         tailor_gnome
@@ -464,40 +457,39 @@ function tui_desktop_theme() {
 function tui_desktop_dailysoftware() {
     cmd=(dialog --separate-output --checklist "Choose the utilities that you want, use SPACE to choose, ENTER to confirm" 0 0 0)
     options=(1 "Chrome" off
-            2 "qBittorrent" off
-            3 "WineHQ" off
-            4 "GIMP" off
-            5 "DarkTable" off
-            6 "VLC" off
-            7 "AppImageLauncher" off)
+        2 "qBittorrent" off
+        3 "WineHQ" off
+        4 "GIMP" off
+        5 "DarkTable" off
+        6 "VLC" off
+        7 "AppImageLauncher" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Start installing Chrome"
-                install_chrome
-                ;;
-            2)
-                sudo apt install qbittorrent -y
-                ;;
-            3)
-                echo "Start installing WineHQ"
-                install_winehq
-                ;;
-            4)
-                sudo apt install gimp -y
-                ;;
-            5)
-                install_darktable
-                ;;
-            6)
-                sudo apt install vlc -y
-                ;;
-            7)
-                sudo apt install appimagelauncher -y
-                ;;
+        1)
+            echo "Start installing Chrome"
+            install_chrome
+            ;;
+        2)
+            sudo apt install qbittorrent -y
+            ;;
+        3)
+            echo "Start installing WineHQ"
+            install_winehq
+            ;;
+        4)
+            sudo apt install gimp -y
+            ;;
+        5)
+            install_darktable
+            ;;
+        6)
+            sudo apt install vlc -y
+            ;;
+        7)
+            sudo apt install appimagelauncher -y
+            ;;
         esac
     done
 }
@@ -506,55 +498,54 @@ function tui_desktop_dailysoftware() {
 function tui_desktop_development() {
     cmd=(dialog --separate-output --checklist "Choose the Development Tools that you want to install" 0 0 0)
     options=(1 "Vim" on
-            2 "VSCode" off
-            3 "Git" off
-            4 "Docker" off
-            5 "Go" off)
+        2 "VSCode" off
+        3 "Git" off
+        4 "Docker" off
+        5 "Go" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Start installing Vim editor"
-                sudo apt install vim -y
-                ;;
-            2)
-                echo "Start installing VSCode"
-                install_vscode
-                ;;
-            3)
-                echo "Start installing Git"
-                sudo apt install git -y
-                ;;
-            4)
-                echo "Start installing Docker"
-                install_docker
-                ;;
-            5)
-                echo "Start installing Go"
-                install_go
+        1)
+            echo "Start installing Vim editor"
+            sudo apt install vim -y
+            ;;
+        2)
+            echo "Start installing VSCode"
+            install_vscode
+            ;;
+        3)
+            echo "Start installing Git"
+            sudo apt install git -y
+            ;;
+        4)
+            echo "Start installing Docker"
+            install_docker
+            ;;
+        5)
+            echo "Start installing Go"
+            install_go
+            ;;
         esac
     done
 }
 
 function tui_server_lab() {
     cmd=(dialog --separate-output --checklist "What's the purpose of this machine? Use space to choose" 0 0 0)
-    options=(1 "Essential Server tools" on    # any option can be set to default to "on"
-            2 "Docker" off)
+    options=(1 "Essential Server tools" on # any option can be set to default to "on"
+        2 "Docker" off)
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
     clear
-    for choice in $choices
-    do
+    for choice in $choices; do
         case $choice in
-            1)
-                echo "Start installing Essential Server tools"
-                tailor_server
-                ;;
-            2)
-                echo "Start installing Docker"
-                install_docker
-                ;;
+        1)
+            echo "Start installing Essential Server tools"
+            tailor_server
+            ;;
+        2)
+            echo "Start installing Docker"
+            install_docker
+            ;;
         esac
     done
 }
@@ -574,8 +565,9 @@ CQU="https://mirrors.cqu.edu.cn/debian"
 
 sudo apt install dialog -y
 
-choice=$(dialog --title "Customize Debian 12" --menu "What's the purpose of this machine? press Enter to confirm" 0 0 0 1 "Desktop" 2 "Server Lab for VMs" 3>&1 1>&2 2>&3 3>&-); clear
-if [ $choice == "1" ];then
+choice=$(dialog --title "Customize Debian 12" --menu "What's the purpose of this machine? press Enter to confirm" 0 0 0 1 "Desktop" 2 "Server Lab for VMs" 3>&1 1>&2 2>&3 3>&-)
+clear
+if [ $choice == "1" ]; then
     tui_desktop2
 else # for server
     read -p "If you want to set GRUB timeout to 0s right now? (N/y): " choice
